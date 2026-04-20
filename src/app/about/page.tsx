@@ -68,11 +68,11 @@ export default function AboutPage() {
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Hero */}
         <div className="text-center mb-20">
-          <h1 className="font-playfair text-4xl sm:text-5xl font-bold text-[#F7F1E8] mb-6">
+          <h1 className="font-playfair text-4xl sm:text-5xl font-bold mb-6" style={{ color: "var(--text)" }}>
             О проекте{" "}
             <span className="text-gradient-gold">Gaudiobooks</span>
           </h1>
-          <p className="text-[#F7F1E8]/60 text-xl leading-relaxed max-w-2xl mx-auto">
+          <p className="text-xl leading-relaxed max-w-2xl mx-auto" style={{ color: "var(--text-2)" }}>
             Мы создаём пространство для знакомства с великим наследием
             гаудия-вайшнавской традиции через силу живого голоса и современные
             технологии.
@@ -80,14 +80,23 @@ export default function AboutPage() {
         </div>
 
         {/* Mission */}
-        <div className="relative overflow-hidden rounded-2xl border border-[#C9A66B]/20 bg-gradient-to-br from-[#C9A66B]/8 via-[#C9A66B]/3 to-transparent p-10 mb-20 text-center">
-          <div className="absolute top-0 left-1/2 w-80 h-80 bg-[#C9A66B]/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
+        <div
+          className="relative overflow-hidden rounded-2xl p-10 mb-20 text-center border"
+          style={{
+            background: "color-mix(in srgb, var(--accent) 6%, var(--bg-2))",
+            borderColor: "var(--border)",
+          }}
+        >
+          <div
+            className="absolute top-0 left-1/2 w-80 h-80 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+            style={{ background: "color-mix(in srgb, var(--accent) 8%, transparent)" }}
+          />
           <div className="relative">
-            <div className="text-[#C9A66B]/20 font-playfair text-6xl mb-4">ॐ</div>
-            <h2 className="font-playfair text-2xl sm:text-3xl font-bold text-[#F7F1E8] mb-4">
+            <div className="font-playfair text-6xl mb-4" style={{ color: "color-mix(in srgb, var(--accent) 25%, transparent)" }}>ॐ</div>
+            <h2 className="font-playfair text-2xl sm:text-3xl font-bold mb-4" style={{ color: "var(--text)" }}>
               Наша миссия
             </h2>
-            <p className="text-[#F7F1E8]/70 text-lg leading-relaxed max-w-2xl mx-auto">
+            <p className="text-lg leading-relaxed max-w-2xl mx-auto" style={{ color: "var(--text-2)" }}>
               Сделать вечную мудрость Вед доступной каждому ищущему. Мы верим, что
               аудиоформат — один из самых живых и непосредственных способов соприкоснуться
               со священными текстами. Голос несёт вибрацию, а вибрация — это само сознание.
@@ -97,12 +106,18 @@ export default function AboutPage() {
 
         {/* Narrator */}
         <div className="mb-20">
-          <h2 className="font-playfair text-3xl font-bold text-[#F7F1E8] mb-10 text-center">
+          <h2 className="font-playfair text-3xl font-bold mb-10 text-center" style={{ color: "var(--text)" }}>
             Голос проекта
           </h2>
-          <div className="card-glow p-8 flex flex-col sm:flex-row gap-8 items-center sm:items-start">
+          <div className="card-base p-8 flex flex-col sm:flex-row gap-8 items-center sm:items-start">
             <div className="flex-shrink-0">
-              <div className="w-32 h-32 rounded-full bg-gradient-to-br from-[#C9A66B]/20 to-[#C9A66B]/5 border-2 border-[#C9A66B]/30 flex items-center justify-center overflow-hidden">
+              <div
+                className="w-32 h-32 rounded-full border-2 flex items-center justify-center overflow-hidden"
+                style={{
+                  background: "color-mix(in srgb, var(--accent) 10%, var(--bg-3))",
+                  borderColor: "color-mix(in srgb, var(--accent) 30%, transparent)",
+                }}
+              >
                 <Image
                   src="https://picsum.photos/seed/narrator/200/200"
                   alt="Субал Сакха дас"
@@ -113,17 +128,17 @@ export default function AboutPage() {
               </div>
             </div>
             <div>
-              <h3 className="font-playfair text-2xl font-bold text-[#F7F1E8] mb-1">
+              <h3 className="font-playfair text-2xl font-bold mb-1" style={{ color: "var(--text)" }}>
                 Субал Сакха дас
               </h3>
-              <p className="text-[#C9A66B] mb-4">Диктор и основатель проекта</p>
-              <p className="text-[#F7F1E8]/60 leading-relaxed mb-4">
+              <p className="mb-4" style={{ color: "var(--accent)" }}>Диктор и основатель проекта</p>
+              <p className="leading-relaxed mb-4" style={{ color: "var(--text-2)" }}>
                 Субал Сакха дас — преданный гаудия-вайшнавской традиции с более чем
                 20-летним опытом изучения и практики. Получив образование в области
                 санскрита и ведической философии, он посвятил своё служение доступному
                 изложению сложных философских концепций.
               </p>
-              <p className="text-[#F7F1E8]/60 leading-relaxed">
+              <p className="leading-relaxed" style={{ color: "var(--text-2)" }}>
                 Его голос отличается особой теплотой и глубиной — качествами, которые
                 помогают слушателю не просто воспринимать информацию, но и чувствовать
                 живую связь с традицией. Каждая запись — это не просто чтение, но
@@ -135,18 +150,24 @@ export default function AboutPage() {
 
         {/* Values */}
         <div className="mb-20">
-          <h2 className="font-playfair text-3xl font-bold text-[#F7F1E8] mb-10 text-center">
+          <h2 className="font-playfair text-3xl font-bold mb-10 text-center" style={{ color: "var(--text)" }}>
             Наши ценности
           </h2>
           <div className="grid sm:grid-cols-2 gap-6">
             {values.map((value) => (
-              <div key={value.title} className="card-glow p-6 flex gap-5">
-                <div className="w-10 h-10 rounded-xl bg-[#C9A66B]/10 border border-[#C9A66B]/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <value.icon className="w-5 h-5 text-[#C9A66B]" />
+              <div key={value.title} className="card-base p-6 flex gap-5">
+                <div
+                  className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 mt-0.5 border"
+                  style={{
+                    background: "color-mix(in srgb, var(--accent) 10%, transparent)",
+                    borderColor: "var(--border)",
+                  }}
+                >
+                  <value.icon className="w-5 h-5" style={{ color: "var(--accent)" }} />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-[#F7F1E8] mb-2">{value.title}</h3>
-                  <p className="text-[#F7F1E8]/50 text-sm leading-relaxed">
+                  <h3 className="font-semibold mb-2" style={{ color: "var(--text)" }}>{value.title}</h3>
+                  <p className="text-sm leading-relaxed" style={{ color: "var(--text-3)" }}>
                     {value.description}
                   </p>
                 </div>
@@ -157,25 +178,34 @@ export default function AboutPage() {
 
         {/* Timeline */}
         <div className="mb-20">
-          <h2 className="font-playfair text-3xl font-bold text-[#F7F1E8] mb-10 text-center">
+          <h2 className="font-playfair text-3xl font-bold mb-10 text-center" style={{ color: "var(--text)" }}>
             История проекта
           </h2>
           <div className="relative">
             {/* Line */}
-            <div className="absolute left-8 top-0 bottom-0 w-px bg-gradient-to-b from-[#C9A66B]/40 via-[#C9A66B]/20 to-transparent" />
+            <div
+              className="absolute left-8 top-0 bottom-0 w-px"
+              style={{ background: "linear-gradient(to bottom, color-mix(in srgb, var(--accent) 40%, transparent), color-mix(in srgb, var(--accent) 10%, transparent), transparent)" }}
+            />
 
             <div className="space-y-8">
               {milestones.map((milestone) => (
                 <div key={milestone.year} className="flex gap-6 pl-4">
                   <div className="relative flex-shrink-0 w-8">
-                    <div className="absolute left-1/2 top-1.5 -translate-x-1/2 w-3 h-3 rounded-full bg-[#C9A66B] shadow-[0_0_8px_rgba(201,166,107,0.6)]" />
+                    <div
+                      className="absolute left-1/2 top-1.5 -translate-x-1/2 w-3 h-3 rounded-full"
+                      style={{
+                        background: "var(--accent)",
+                        boxShadow: "0 0 8px color-mix(in srgb, var(--accent) 60%, transparent)",
+                      }}
+                    />
                   </div>
                   <div className="pb-8">
-                    <div className="text-[#C9A66B] text-sm font-bold mb-1">
+                    <div className="text-sm font-bold mb-1" style={{ color: "var(--accent)" }}>
                       {milestone.year}
                     </div>
-                    <h3 className="font-semibold text-[#F7F1E8] mb-2">{milestone.title}</h3>
-                    <p className="text-[#F7F1E8]/50 text-sm leading-relaxed">
+                    <h3 className="font-semibold mb-2" style={{ color: "var(--text)" }}>{milestone.title}</h3>
+                    <p className="text-sm leading-relaxed" style={{ color: "var(--text-3)" }}>
                       {milestone.description}
                     </p>
                   </div>
@@ -187,24 +217,26 @@ export default function AboutPage() {
 
         {/* CTA */}
         <div className="text-center">
-          <h2 className="font-playfair text-3xl font-bold text-[#F7F1E8] mb-4">
+          <h2 className="font-playfair text-3xl font-bold mb-4" style={{ color: "var(--text)" }}>
             Станьте частью нашего сообщества
           </h2>
-          <p className="text-[#F7F1E8]/50 mb-8 max-w-lg mx-auto">
+          <p className="mb-8 max-w-lg mx-auto" style={{ color: "var(--text-3)" }}>
             Поддержите проект и помогите нам продолжать эту важную работу по
             распространению духовного знания
           </p>
           <div className="flex justify-center gap-4 flex-wrap">
             <Link
               href="/donate"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-[#C9A66B] text-[#0E0E12] font-semibold hover:bg-[#D4B47C] transition-all glow-sandalwood"
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold transition-all hover:opacity-90"
+              style={{ background: "var(--accent)", color: "var(--bg)" }}
             >
               <Heart className="w-5 h-5" />
               Поддержать
             </Link>
             <Link
               href="/catalog"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl border border-[#C9A66B]/30 text-[#F7F1E8] font-semibold hover:border-[#C9A66B]/60 transition-all"
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl border font-semibold transition-all hover:opacity-80"
+              style={{ borderColor: "var(--border)", color: "var(--text)" }}
             >
               Слушать книги <ArrowRight className="w-5 h-5" />
             </Link>

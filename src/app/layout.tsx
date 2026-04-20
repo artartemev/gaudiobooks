@@ -24,7 +24,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ru" className={`${geistSans.variable}`}>
-      <body className="min-h-screen flex flex-col bg-[#EDE4D0] text-[#1C0F0A]">
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: `(function(){var t=localStorage.getItem('theme');if(t==='dark'||(t===null&&window.matchMedia('(prefers-color-scheme:dark)').matches)){document.documentElement.classList.add('dark')}})()` }} />
+      </head>
+      <body className="min-h-screen flex flex-col">
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />

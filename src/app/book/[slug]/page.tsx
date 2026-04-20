@@ -33,12 +33,14 @@ export default function BookPage({ params }: Props) {
     notFound();
   }
 
-  const chapters = bookChapters[book.slug] ?? Array.from({ length: book.chapters }, (_, i) => ({
-    number: i + 1,
-    title: `Глава ${i + 1}`,
-    duration: "30м",
-    partTitle: '',
-  }));
+  const chapters =
+    bookChapters[book.slug] ??
+    Array.from({ length: book.chapters }, (_, i) => ({
+      number: i + 1,
+      title: `Глава ${i + 1}`,
+      duration: "30м",
+      partTitle: "",
+    }));
 
   const related = books
     .filter((b) => b.authorId === book.authorId && b.id !== book.id)
@@ -50,7 +52,8 @@ export default function BookPage({ params }: Props) {
         {/* Back */}
         <Link
           href="/catalog"
-          className="inline-flex items-center gap-2 text-[#1C0F0A]/40 hover:text-[#815854] text-sm mb-8 transition-colors"
+          className="inline-flex items-center gap-2 text-sm mb-8 transition-colors hover:opacity-80"
+          style={{ color: "var(--text-3)" }}
         >
           <ArrowLeft className="w-4 h-4" />
           Назад в каталог
@@ -60,8 +63,11 @@ export default function BookPage({ params }: Props) {
         <div className="flex flex-col md:flex-row gap-8 lg:gap-12 mb-14">
           {/* Cover */}
           <div className="flex-shrink-0">
-            <div className="relative w-56 sm:w-64 mx-auto md:mx-0 rounded-2xl overflow-hidden shadow-2xl shadow-black/50 border border-[#815854]/20">
-              <div className="aspect-[2/3] bg-gradient-to-br from-[#E0D2B8] to-[#EDE4D0]">
+            <div
+              className="relative w-56 sm:w-64 mx-auto md:mx-0 rounded-2xl overflow-hidden shadow-2xl border"
+              style={{ borderColor: "var(--border)" }}
+            >
+              <div className="aspect-[2/3]" style={{ background: "var(--bg-2)" }}>
                 {book.cover ? (
                   <Image
                     src={book.cover}
@@ -73,12 +79,14 @@ export default function BookPage({ params }: Props) {
                   />
                 ) : (
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <BookOpen className="w-16 h-16 text-[#815854]/30" />
+                    <BookOpen className="w-16 h-16" style={{ color: "var(--text-3)" }} />
                   </div>
                 )}
               </div>
-              {/* Glow */}
-              <div className="absolute inset-0 rounded-2xl ring-1 ring-[#815854]/20 pointer-events-none" />
+              <div
+                className="absolute inset-0 rounded-2xl pointer-events-none"
+                style={{ boxShadow: "inset 0 0 0 1px var(--border)" }}
+              />
             </div>
           </div>
 
@@ -86,47 +94,62 @@ export default function BookPage({ params }: Props) {
           <div className="flex-1">
             <div className="flex flex-wrap gap-2 mb-4">
               {book.isNew && (
-                <Badge className="bg-[#815854] text-[#EDE4D0] font-bold border-0">
+                <Badge
+                  className="font-bold border-0"
+                  style={{ background: "var(--accent)", color: "var(--bg)" }}
+                >
                   НОВИНКА
                 </Badge>
               )}
               {book.isPopular && (
-                <Badge className="bg-white/10 text-[#1C0F0A] border border-white/20">
+                <Badge
+                  className="border"
+                  style={{ background: "var(--bg-3)", color: "var(--text-2)", borderColor: "var(--border)" }}
+                >
                   ПОПУЛЯРНОЕ
                 </Badge>
               )}
             </div>
 
-            <h1 className="font-playfair text-3xl sm:text-4xl font-bold text-[#1C0F0A] leading-tight mb-3">
+            <h1
+              className="font-playfair text-3xl sm:text-4xl font-bold leading-tight mb-3"
+              style={{ color: "var(--text)" }}
+            >
               {book.title}
             </h1>
 
-            <p className="text-[#815854] text-lg mb-6">{book.author}</p>
+            <p className="text-lg mb-6" style={{ color: "var(--accent)" }}>
+              {book.author}
+            </p>
 
             <div className="flex flex-wrap gap-6 mb-6 text-sm">
-              <div className="flex items-center gap-2 text-[#1C0F0A]/50">
-                <Clock className="w-4 h-4 text-[#815854]/60" />
+              <div className="flex items-center gap-2" style={{ color: "var(--text-2)" }}>
+                <Clock className="w-4 h-4" style={{ color: "var(--text-3)" }} />
                 {book.duration}
               </div>
-              <div className="flex items-center gap-2 text-[#1C0F0A]/50">
-                <BookOpen className="w-4 h-4 text-[#815854]/60" />
+              <div className="flex items-center gap-2" style={{ color: "var(--text-2)" }}>
+                <BookOpen className="w-4 h-4" style={{ color: "var(--text-3)" }} />
                 {book.chapters} глав
               </div>
             </div>
 
-            <p className="text-[#1C0F0A]/60 leading-relaxed mb-8 max-w-2xl">
+            <p className="leading-relaxed mb-8 max-w-2xl" style={{ color: "var(--text-2)" }}>
               {book.description}
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3">
               <button
                 onClick={() => setCurrentBook(book)}
-                className="flex items-center justify-center gap-3 px-8 py-4 rounded-xl bg-[#815854] text-[#EDE4D0] font-semibold text-base hover:bg-[#9A6B62] transition-all duration-300 glow-sandalwood shadow-lg shadow-[#815854]/20"
+                className="flex items-center justify-center gap-3 px-8 py-4 rounded-xl font-semibold text-base transition-all duration-300 hover:opacity-90 shadow-lg"
+                style={{ background: "var(--accent)", color: "var(--bg)" }}
               >
                 <Play className="w-5 h-5" fill="currentColor" />
                 Слушать сейчас
               </button>
-              <button className="flex items-center justify-center gap-3 px-8 py-4 rounded-xl border border-[#815854]/30 bg-white/5 text-[#1C0F0A] font-semibold text-base hover:border-[#815854]/60 transition-all duration-300">
+              <button
+                className="flex items-center justify-center gap-3 px-8 py-4 rounded-xl border font-semibold text-base transition-all duration-300 hover:opacity-80"
+                style={{ borderColor: "var(--border)", color: "var(--text)" }}
+              >
                 + В закладки
               </button>
             </div>
@@ -135,67 +158,71 @@ export default function BookPage({ params }: Props) {
 
         {/* Chapters */}
         <div className="mb-14">
-          <h2 className="font-playfair text-2xl font-bold text-[#1C0F0A] mb-6">
+          <h2 className="font-playfair text-2xl font-bold mb-6" style={{ color: "var(--text)" }}>
             Содержание
           </h2>
           <div className="space-y-2">
             {chapters.map((chapter, idx) => (
               <div key={chapter.number}>
                 {/* Part divider when partTitle changes */}
-                {chapter.partTitle && (idx === 0 || chapters[idx - 1].partTitle !== chapter.partTitle) && (
-                  <p className="text-[#815854]/60 text-xs uppercase tracking-widest font-semibold px-1 pt-4 pb-2 first:pt-0">
-                    {chapter.partTitle}
-                  </p>
-                )}
-              <div
-                className="card-glow overflow-hidden"
-              >
-                <button
-                  className="w-full flex items-center gap-4 p-4 text-left"
-                  onClick={() =>
-                    setOpenChapter(
-                      openChapter === chapter.number ? null : chapter.number
-                    )
-                  }
-                >
-                  <span className="w-8 h-8 rounded-lg bg-[#815854]/10 flex items-center justify-center text-[#815854] text-sm font-bold flex-shrink-0">
-                    {chapter.number}
-                  </span>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-[#1C0F0A] text-sm font-medium truncate">
-                      {chapter.title}
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-3 ml-4">
-                    <span className="text-[#1C0F0A]/30 text-xs hidden sm:block">
-                      {chapter.duration}
-                    </span>
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setCurrentBook(book);
-                      }}
-                      className="p-1.5 rounded-lg bg-[#815854]/10 text-[#815854] hover:bg-[#815854]/20 transition-colors"
-                      aria-label="Воспроизвести главу"
+                {chapter.partTitle &&
+                  (idx === 0 || chapters[idx - 1].partTitle !== chapter.partTitle) && (
+                    <p
+                      className="text-xs uppercase tracking-widest font-semibold px-1 pt-4 pb-2 first:pt-0"
+                      style={{ color: "var(--accent)" }}
                     >
-                      <Play className="w-3.5 h-3.5" fill="currentColor" />
-                    </button>
-                    {openChapter === chapter.number ? (
-                      <ChevronUp className="w-4 h-4 text-[#1C0F0A]/30" />
-                    ) : (
-                      <ChevronDown className="w-4 h-4 text-[#1C0F0A]/30" />
-                    )}
-                  </div>
-                </button>
-                {openChapter === chapter.number && (
-                  <div className="px-4 pb-4 pt-0 border-t border-[#815854]/10">
-                    <p className="text-[#1C0F0A]/40 text-sm mt-3">
-                      Продолжительность: {chapter.duration}. Нажмите кнопку
-                      воспроизведения, чтобы начать слушать эту главу.
+                      {chapter.partTitle}
                     </p>
-                  </div>
-                )}
-              </div>
+                  )}
+                <div className="card-base overflow-hidden">
+                  <button
+                    className="w-full flex items-center gap-4 p-4 text-left"
+                    onClick={() =>
+                      setOpenChapter(openChapter === chapter.number ? null : chapter.number)
+                    }
+                  >
+                    <span
+                      className="w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold flex-shrink-0"
+                      style={{ background: "var(--bg-3)", color: "var(--accent)" }}
+                    >
+                      {chapter.number}
+                    </span>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-medium truncate" style={{ color: "var(--text)" }}>
+                        {chapter.title}
+                      </p>
+                    </div>
+                    <div className="flex items-center gap-3 ml-4">
+                      <span className="text-xs hidden sm:block" style={{ color: "var(--text-3)" }}>
+                        {chapter.duration}
+                      </span>
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setCurrentBook(book);
+                        }}
+                        className="p-1.5 rounded-lg transition-colors hover:opacity-80"
+                        style={{ background: "color-mix(in srgb, var(--accent) 15%, transparent)", color: "var(--accent)" }}
+                        aria-label="Воспроизвести главу"
+                      >
+                        <Play className="w-3.5 h-3.5" fill="currentColor" />
+                      </button>
+                      {openChapter === chapter.number ? (
+                        <ChevronUp className="w-4 h-4" style={{ color: "var(--text-3)" }} />
+                      ) : (
+                        <ChevronDown className="w-4 h-4" style={{ color: "var(--text-3)" }} />
+                      )}
+                    </div>
+                  </button>
+                  {openChapter === chapter.number && (
+                    <div className="px-4 pb-4 pt-0 border-t" style={{ borderColor: "var(--border)" }}>
+                      <p className="text-sm mt-3" style={{ color: "var(--text-3)" }}>
+                        Продолжительность: {chapter.duration}. Нажмите кнопку воспроизведения,
+                        чтобы начать слушать эту главу.
+                      </p>
+                    </div>
+                  )}
+                </div>
               </div>
             ))}
           </div>
@@ -204,7 +231,7 @@ export default function BookPage({ params }: Props) {
         {/* Related Books */}
         {related.length > 0 && (
           <div>
-            <h2 className="font-playfair text-2xl font-bold text-[#1C0F0A] mb-6">
+            <h2 className="font-playfair text-2xl font-bold mb-6" style={{ color: "var(--text)" }}>
               Другие книги автора
             </h2>
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">

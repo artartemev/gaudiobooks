@@ -3,49 +3,87 @@
 @import "@fontsource/playfair-display/700.css";
 @import "@fontsource/playfair-display/400-italic.css";
 
+/* Light theme (default) */
 :root {
-  --background: #EDE4D0;
-  --foreground: #1C0F0A;
-  --sandalwood: #815854;
-  --deep-night: #EDE4D0;
-  --cream: #1C0F0A;
+  --bg: #EDE4D0;
+  --bg-2: #E4D9C4;
+  --bg-3: #D8CCBA;
+  --text: #1C0F0A;
+  --text-2: #6B4C3B;
+  --text-3: #A08060;
+  --accent: #815854;
+  --accent-2: #9A6B62;
+  --border: rgba(129, 88, 84, 0.18);
+  --shadow: rgba(28, 15, 10, 0.08);
 
   /* shadcn/ui design tokens */
   --radius: 0.75rem;
   --primary: #815854;
   --primary-foreground: #EDE4D0;
-  --secondary: rgba(255, 255, 255, 0.06);
+  --secondary: rgba(129, 88, 84, 0.06);
   --secondary-foreground: #1C0F0A;
-  --muted: rgba(255, 255, 255, 0.06);
-  --muted-foreground: rgba(247, 241, 232, 0.6);
-  --accent: rgba(129, 88, 84, 0.15);
-  --accent-foreground: #815854;
-  --border: rgba(129, 88, 84, 0.2);
-  --input: rgba(255, 255, 255, 0.08);
+  --muted: rgba(129, 88, 84, 0.06);
+  --muted-foreground: rgba(28, 15, 10, 0.5);
+  --border-ui: rgba(129, 88, 84, 0.18);
+  --input: rgba(129, 88, 84, 0.1);
   --ring: rgba(129, 88, 84, 0.4);
-  --card: rgba(255, 255, 255, 0.04);
+  --card: #E4D9C4;
   --card-foreground: #1C0F0A;
-  --popover: #E0D2B8;
+  --popover: #E4D9C4;
   --popover-foreground: #1C0F0A;
   --destructive: #ef4444;
   --destructive-foreground: #fff;
 }
 
+/* Dark theme */
+.dark {
+  --bg: #0E0E12;
+  --bg-2: #16161C;
+  --bg-3: #1E1E26;
+  --text: #F0E8DC;
+  --text-2: #A89880;
+  --text-3: #6B5C50;
+  --accent: #C9A66B;
+  --accent-2: #D4B47C;
+  --border: rgba(201, 166, 107, 0.18);
+  --shadow: rgba(0, 0, 0, 0.4);
+
+  --primary: #C9A66B;
+  --primary-foreground: #0E0E12;
+  --secondary: rgba(201, 166, 107, 0.06);
+  --secondary-foreground: #F0E8DC;
+  --muted: rgba(201, 166, 107, 0.06);
+  --muted-foreground: rgba(240, 232, 220, 0.5);
+  --border-ui: rgba(201, 166, 107, 0.18);
+  --input: rgba(201, 166, 107, 0.1);
+  --ring: rgba(201, 166, 107, 0.4);
+  --card: #16161C;
+  --card-foreground: #F0E8DC;
+  --popover: #16161C;
+  --popover-foreground: #F0E8DC;
+}
+
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-sandalwood: var(--sandalwood);
-  --color-deep-night: var(--deep-night);
-  --color-cream: var(--cream);
+  --color-bg: var(--bg);
+  --color-bg-2: var(--bg-2);
+  --color-bg-3: var(--bg-3);
+  --color-text: var(--text);
+  --color-text-2: var(--text-2);
+  --color-text-3: var(--text-3);
+  --color-accent: var(--accent);
+  --color-accent-2: var(--accent-2);
+  --color-border: var(--border);
+  --color-shadow: var(--shadow);
+
+  --color-background: var(--bg);
+  --color-foreground: var(--text);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-border: var(--border);
+  --color-border-ui: var(--border-ui);
   --color-input: var(--input);
   --color-ring: var(--ring);
   --color-card: var(--card);
@@ -68,14 +106,43 @@
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--bg);
+  color: var(--text);
   font-family: var(--font-geist-sans), Inter, Arial, sans-serif;
   min-height: 100vh;
+  transition: background 0.3s, color 0.3s;
 }
 
 .font-playfair {
   font-family: "Playfair Display", Georgia, serif;
+}
+
+/* Card base — used everywhere instead of card-glow */
+.card-base {
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  transition: box-shadow 0.25s, transform 0.25s, border-color 0.25s;
+}
+
+.card-base:hover {
+  box-shadow: 0 8px 32px var(--shadow);
+  transform: translateY(-2px);
+  border-color: var(--accent);
+}
+
+/* Legacy card-glow — keep for backward compat, maps to card-base */
+.card-glow {
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  transition: box-shadow 0.25s, transform 0.25s, border-color 0.25s;
+}
+
+.card-glow:hover {
+  box-shadow: 0 8px 32px var(--shadow);
+  border-color: var(--accent);
+  transform: translateY(-2px);
 }
 
 .glow-sandalwood {
@@ -87,24 +154,18 @@ body {
 }
 
 .text-gradient-gold {
-  background: linear-gradient(135deg, #815854 0%, #F0D090 50%, #815854 100%);
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 50%, var(--accent) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-.card-glow {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(129, 88, 84, 0.2);
-  border-radius: 0.75rem;
-  transition: all 0.3s ease;
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }
-
-.card-glow:hover {
-  background: rgba(255, 255, 255, 0.07);
-  border-color: rgba(129, 88, 84, 0.5);
-  box-shadow: 0 0 30px rgba(129, 88, 84, 0.15);
-  transform: translateY(-2px);
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .scrollbar-thin::-webkit-scrollbar {
@@ -114,6 +175,6 @@ body {
   background: transparent;
 }
 .scrollbar-thin::-webkit-scrollbar-thumb {
-  background: rgba(129, 88, 84, 0.3);
+  background: var(--border);
   border-radius: 2px;
 }

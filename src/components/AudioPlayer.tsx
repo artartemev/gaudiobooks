@@ -71,7 +71,7 @@ export function AudioPlayer({ book, onClose }: AudioPlayerProps) {
   };
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 bg-[#2C1810]/98 border-t border-[#815854]/20 backdrop-blur-xl shadow-[0_-8px_40px_rgba(0,0,0,0.5)]">
+    <div className="fixed bottom-0 left-0 right-0 z-50 border-t backdrop-blur-xl shadow-[0_-8px_40px_rgba(0,0,0,0.5)]" style={{ background: "#0E0E12", borderColor: "rgba(201,166,107,0.15)" }}>
       <div className="max-w-7xl mx-auto px-4 py-3">
         {/* Progress bar */}
         <div className="mb-3">

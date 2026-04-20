@@ -11,21 +11,24 @@ interface SearchBarProps {
   className?: string;
 }
 
-export function SearchBar({ value, onChange, placeholder = "Поиск книг...", className }: SearchBarProps) {
+export function SearchBar({
+  value,
+  onChange,
+  placeholder = "Поиск книг...",
+  className,
+}: SearchBarProps) {
   const [focused, setFocused] = useState(false);
 
   return (
     <div
-      className={cn(
-        "relative flex items-center rounded-xl border transition-all duration-300",
-        focused
-          ? "border-[#C9A66B]/60 shadow-[0_0_20px_rgba(201,166,107,0.15)]"
-          : "border-[#C9A66B]/20",
-        "bg-white/5",
-        className
-      )}
+      className={cn("relative flex items-center rounded-xl border transition-all duration-300", className)}
+      style={{
+        background: "var(--bg-2)",
+        borderColor: focused ? "var(--accent)" : "var(--border)",
+        boxShadow: focused ? "0 0 0 2px color-mix(in srgb, var(--accent) 20%, transparent)" : undefined,
+      }}
     >
-      <Search className="absolute left-4 w-4 h-4 text-[#F7F1E8]/40" />
+      <Search className="absolute left-4 w-4 h-4" style={{ color: "var(--text-3)" }} />
       <input
         type="text"
         value={value}
@@ -33,12 +36,14 @@ export function SearchBar({ value, onChange, placeholder = "Поиск книг.
         onFocus={() => setFocused(true)}
         onBlur={() => setFocused(false)}
         placeholder={placeholder}
-        className="w-full pl-11 pr-10 py-3 bg-transparent text-[#F7F1E8] placeholder-[#F7F1E8]/30 text-sm outline-none"
+        className="w-full pl-11 pr-10 py-3 bg-transparent text-sm outline-none"
+        style={{ color: "var(--text)" }}
       />
       {value && (
         <button
           onClick={() => onChange("")}
-          className="absolute right-3 p-1 rounded-lg text-[#F7F1E8]/40 hover:text-[#F7F1E8] transition-colors"
+          className="absolute right-3 p-1 rounded-lg transition-colors hover:opacity-80"
+          style={{ color: "var(--text-3)" }}
           aria-label="Очистить поиск"
         >
           <X className="w-4 h-4" />

@@ -72,10 +72,10 @@ export default function CatalogPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-10">
-          <h1 className="font-playfair text-4xl sm:text-5xl font-bold text-[#1C0F0A] mb-3">
+          <h1 className="font-playfair text-4xl sm:text-5xl font-bold mb-3" style={{ color: "var(--text)" }}>
             Каталог книг
           </h1>
-          <p className="text-[#1C0F0A]/50 text-lg">
+          <p className="text-lg" style={{ color: "var(--text-3)" }}>
             {books.length} аудиокниг гаудия-вайшнавской традиции
           </p>
         </div>
@@ -94,25 +94,35 @@ export default function CatalogPage() {
               <select
                 value={sort}
                 onChange={(e) => setSort(e.target.value as SortKey)}
-                className="appearance-none pl-10 pr-8 py-3 rounded-xl border border-[#815854]/20 bg-white/5 text-[#1C0F0A] text-sm focus:outline-none focus:border-[#815854]/50 cursor-pointer min-w-[160px]"
+                className="appearance-none pl-10 pr-8 py-3 rounded-xl border text-sm focus:outline-none cursor-pointer min-w-[160px]"
+                style={{
+                  background: "var(--bg-2)",
+                  color: "var(--text)",
+                  borderColor: "var(--border)",
+                }}
               >
                 {sortOptions.map((opt) => (
-                  <option key={opt.value} value={opt.value} className="bg-[#E0D2B8]">
+                  <option key={opt.value} value={opt.value} style={{ background: "var(--bg-2)" }}>
                     {opt.label}
                   </option>
                 ))}
               </select>
-              <ArrowUpDown className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#1C0F0A]/40 pointer-events-none" />
+              <ArrowUpDown
+                className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 pointer-events-none"
+                style={{ color: "var(--text-3)" }}
+              />
             </div>
 
             {/* Filter toggle (mobile) */}
             <button
               className={cn(
-                "lg:hidden flex items-center gap-2 px-4 py-3 rounded-xl border text-sm transition-all",
-                showFilters
-                  ? "border-[#815854]/50 bg-[#815854]/10 text-[#815854]"
-                  : "border-[#815854]/20 bg-white/5 text-[#1C0F0A]/70"
+                "lg:hidden flex items-center gap-2 px-4 py-3 rounded-xl border text-sm transition-all"
               )}
+              style={
+                showFilters
+                  ? { borderColor: "var(--accent)", background: "color-mix(in srgb, var(--accent) 10%, transparent)", color: "var(--accent)" }
+                  : { borderColor: "var(--border)", color: "var(--text-2)" }
+              }
               onClick={() => setShowFilters(!showFilters)}
             >
               <SlidersHorizontal className="w-4 h-4" />
@@ -130,18 +140,21 @@ export default function CatalogPage() {
             )}
           >
             <div className="sticky top-24">
-              <h3 className="text-[#815854] font-semibold text-xs uppercase tracking-widest mb-4">
+              <h3
+                className="font-semibold text-xs uppercase tracking-widest mb-4"
+                style={{ color: "var(--accent)" }}
+              >
                 Авторы
               </h3>
               <div className="space-y-1">
                 <button
                   onClick={() => setActiveAuthor("all")}
-                  className={cn(
-                    "w-full text-left px-3 py-2 rounded-lg text-sm transition-all",
+                  className="w-full text-left px-3 py-2 rounded-lg text-sm transition-all"
+                  style={
                     activeAuthor === "all"
-                      ? "bg-[#815854]/15 text-[#815854]"
-                      : "text-[#1C0F0A]/60 hover:text-[#1C0F0A] hover:bg-white/5"
-                  )}
+                      ? { background: "color-mix(in srgb, var(--accent) 15%, transparent)", color: "var(--accent)" }
+                      : { color: "var(--text-2)" }
+                  }
                 >
                   Все авторы
                 </button>
@@ -149,15 +162,15 @@ export default function CatalogPage() {
                   <button
                     key={author.id}
                     onClick={() => setActiveAuthor(author.id)}
-                    className={cn(
-                      "w-full text-left px-3 py-2 rounded-lg text-sm transition-all leading-tight",
+                    className="w-full text-left px-3 py-2 rounded-lg text-sm transition-all leading-tight"
+                    style={
                       activeAuthor === author.id
-                        ? "bg-[#815854]/15 text-[#815854]"
-                        : "text-[#1C0F0A]/60 hover:text-[#1C0F0A] hover:bg-white/5"
-                    )}
+                        ? { background: "color-mix(in srgb, var(--accent) 15%, transparent)", color: "var(--accent)" }
+                        : { color: "var(--text-2)" }
+                    }
                   >
                     <span className="line-clamp-2">{author.name}</span>
-                    <span className="text-[10px] text-[#1C0F0A]/30 mt-0.5 block">
+                    <span className="text-[10px] mt-0.5 block" style={{ color: "var(--text-3)" }}>
                       {author.booksCount} книг
                     </span>
                   </button>
@@ -170,14 +183,14 @@ export default function CatalogPage() {
           <div className="flex-1 min-w-0">
             {filtered.length === 0 ? (
               <div className="text-center py-20">
-                <p className="text-[#1C0F0A]/30 text-lg mb-3">Ничего не найдено</p>
-                <p className="text-[#1C0F0A]/20 text-sm">
+                <p className="text-lg mb-3" style={{ color: "var(--text-3)" }}>Ничего не найдено</p>
+                <p className="text-sm" style={{ color: "var(--text-3)" }}>
                   Попробуйте изменить параметры поиска
                 </p>
               </div>
             ) : (
               <>
-                <p className="text-[#1C0F0A]/30 text-sm mb-6">
+                <p className="text-sm mb-6" style={{ color: "var(--text-3)" }}>
                   Найдено: {filtered.length} {filtered.length === 1 ? "книга" : "книг"}
                 </p>
                 <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5">

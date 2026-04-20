@@ -1,153 +1,191 @@
 import Link from "next/link";
-import { ArrowRight, Star, TrendingUp, Sparkles } from "lucide-react";
-import { HeroSection } from "@/components/HeroSection";
+import { ArrowRight, Play } from "lucide-react";
 import { BookCard } from "@/components/BookCard";
 import { books } from "@/lib/data";
+import type { Book } from "@/lib/data";
 
 const featuredBooks = books.filter((b) => b.isPopular).slice(0, 4);
-const newReleases = books.filter((b) => b.isNew).slice(0, 4);
+const newBooks = books.filter((b) => b.isNew).slice(0, 4);
+const trendingBooks = books.slice(0, 6);
 
 const stats = [
-  { value: "58", label: "аудиокниг в каталоге", icon: "📚" },
-  { value: "20", label: "авторов и ачарьев", icon: "✍️" },
-  { value: "1 126", label: "глав и треков", icon: "🎧" },
-  { value: "510+", label: "часов записей", icon: "⏱️" },
+  { value: "58", label: "аудиокниг" },
+  { value: "20", label: "авторов" },
+  { value: "1 126", label: "треков" },
+  { value: "510+", label: "часов" },
 ];
+
+function SectionHeader({ title, href }: { title: string; href?: string }) {
+  return (
+    <div className="flex items-center justify-between mb-6">
+      <h2 className="font-playfair text-2xl font-bold" style={{ color: "var(--text)" }}>
+        {title}
+      </h2>
+      {href && (
+        <Link
+          href={href}
+          className="text-xs font-medium flex items-center gap-1 transition-colors"
+          style={{ color: "var(--accent)" }}
+        >
+          Все <ArrowRight className="w-3 h-3" />
+        </Link>
+      )}
+    </div>
+  );
+}
+
+function TrendingRow({ book, rank }: { book: Book; rank: number }) {
+  return (
+    <Link href={`/book/${book.slug}`}>
+      <div className="card-base flex items-center gap-4 p-4 group cursor-pointer">
+        <span
+          className="font-playfair text-3xl font-bold w-8 shrink-0 text-center"
+          style={{ color: "var(--text-3)" }}
+        >
+          {rank}
+        </span>
+        <div
+          className="w-10 h-14 rounded-lg overflow-hidden shrink-0"
+          style={{ background: "var(--bg-3)" }}
+        >
+          {book.cover && (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img src={book.cover} alt={book.title} className="w-full h-full object-cover" />
+          )}
+        </div>
+        <div className="min-w-0">
+          <p
+            className="text-sm font-medium line-clamp-2 mb-1 transition-colors group-hover:opacity-80"
+            style={{ color: "var(--text)" }}
+          >
+            {book.title}
+          </p>
+          <p className="text-xs line-clamp-1" style={{ color: "var(--text-2)" }}>
+            {book.author}
+          </p>
+          <p className="text-xs mt-1" style={{ color: "var(--text-3)" }}>
+            {book.duration}
+          </p>
+        </div>
+      </div>
+    </Link>
+  );
+}
 
 export default function HomePage() {
   return (
-    <div className="pb-10">
-      <HeroSection />
-
-      {/* Stats */}
-      <section className="py-14 border-y border-[#815854]/10 bg-gradient-to-r from-[#EDE4D0] via-[#E8DEC8] to-[#EDE4D0]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-            {stats.map((stat) => (
-              <div key={stat.label} className="text-center group">
-                <div className="text-2xl mb-2">{stat.icon}</div>
-                <div className="font-playfair text-3xl font-bold text-[#815854] mb-1">
-                  {stat.value}
-                </div>
-                <div className="text-[#1C0F0A]/40 text-sm">{stat.label}</div>
-              </div>
-            ))}
-          </div>
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-32">
+      {/* Hero */}
+      <section className="relative py-24 text-center overflow-hidden">
+        {/* Big blurred glow behind */}
+        <div
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full pointer-events-none"
+          style={{ background: "var(--accent)", opacity: 0.06, filter: "blur(80px)" }}
+        />
+        <p
+          className="text-xs uppercase tracking-[0.3em] mb-6 relative"
+          style={{ color: "var(--text-3)" }}
+        >
+          Аудиокниги. Гаудия Вайшнавизм
+        </p>
+        <h1
+          className="font-playfair text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 leading-tight relative"
+          style={{ color: "var(--text)" }}
+        >
+          Слушайте вечную<br />мудрость
+        </h1>
+        <p
+          className="text-lg mb-10 max-w-xl mx-auto relative"
+          style={{ color: "var(--text-2)" }}
+        >
+          510+ часов гаудия-вайшнавских текстов в аудиоформате. Озвучка Субала Сакха даса.
+        </p>
+        <div className="flex items-center justify-center gap-4 flex-wrap relative">
+          <Link
+            href="/catalog"
+            className="flex items-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-sm transition-all duration-200 hover:opacity-90"
+            style={{ background: "var(--accent)", color: "var(--bg)" }}
+          >
+            <Play className="w-4 h-4" fill="currentColor" /> Начать слушать
+          </Link>
+          <Link
+            href="/catalog"
+            className="flex items-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-sm border transition-all duration-200 hover:opacity-80"
+            style={{ borderColor: "var(--border)", color: "var(--text-2)" }}
+          >
+            Весь каталог <ArrowRight className="w-4 h-4" />
+          </Link>
         </div>
       </section>
 
-      {/* Featured Books */}
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between mb-8">
-            <div className="flex items-center gap-3">
-              <Star className="w-5 h-5 text-[#815854]" />
-              <h2 className="font-playfair text-2xl sm:text-3xl font-bold text-[#1C0F0A]">
-                Избранные книги
-              </h2>
-            </div>
-            <Link
-              href="/catalog"
-              className="flex items-center gap-1.5 text-[#815854] text-sm hover:gap-2.5 transition-all duration-200"
+      {/* Stats */}
+      <section
+        className="py-12 grid grid-cols-2 sm:grid-cols-4 gap-6 border-y mb-16"
+        style={{ borderColor: "var(--border)" }}
+      >
+        {stats.map((s) => (
+          <div key={s.label} className="text-center">
+            <div
+              className="font-playfair text-3xl font-bold mb-1"
+              style={{ color: "var(--accent)" }}
             >
-              Все книги <ArrowRight className="w-4 h-4" />
-            </Link>
+              {s.value}
+            </div>
+            <div className="text-xs" style={{ color: "var(--text-3)" }}>
+              {s.label}
+            </div>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-            {featuredBooks.map((book) => (
-              <BookCard key={book.id} book={book} />
-            ))}
-          </div>
+        ))}
+      </section>
+
+      {/* Featured Books */}
+      <section className="mb-16">
+        <SectionHeader title="Избранные книги" href="/catalog" />
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5">
+          {featuredBooks.map((b) => (
+            <BookCard key={b.id} book={b} />
+          ))}
         </div>
       </section>
 
       {/* New Releases */}
-      <section className="py-16 bg-gradient-to-b from-transparent via-[#E8DEC8]/50 to-transparent">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between mb-8">
-            <div className="flex items-center gap-3">
-              <Sparkles className="w-5 h-5 text-[#815854]" />
-              <h2 className="font-playfair text-2xl sm:text-3xl font-bold text-[#1C0F0A]">
-                Новые поступления
-              </h2>
-            </div>
-            <Link
-              href="/catalog?filter=new"
-              className="flex items-center gap-1.5 text-[#815854] text-sm hover:gap-2.5 transition-all duration-200"
-            >
-              Смотреть все <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-            {newReleases.map((book) => (
-              <BookCard key={book.id} book={book} />
-            ))}
-          </div>
+      <section className="mb-16">
+        <SectionHeader title="Новые поступления" href="/catalog" />
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5">
+          {newBooks.map((b) => (
+            <BookCard key={b.id} book={b} />
+          ))}
         </div>
       </section>
 
       {/* Trending */}
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center gap-3 mb-8">
-            <TrendingUp className="w-5 h-5 text-[#815854]" />
-            <h2 className="font-playfair text-2xl sm:text-3xl font-bold text-[#1C0F0A]">
-              Популярное сейчас
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {books.slice(0, 3).map((book, idx) => (
-              <Link key={book.id} href={`/book/${book.slug}`}>
-                <div className="card-glow flex items-center gap-4 p-4">
-                  <span className="font-playfair text-4xl font-bold text-[#815854]/20 w-10 flex-shrink-0">
-                    {idx + 1}
-                  </span>
-                  <div className="w-12 h-16 rounded-lg overflow-hidden flex-shrink-0 bg-[#815854]/10">
-                    {book.cover && (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img
-                        src={book.cover}
-                        alt={book.title}
-                        className="w-full h-full object-cover"
-                      />
-                    )}
-                  </div>
-                  <div className="min-w-0">
-                    <p className="text-[#1C0F0A] font-medium text-sm leading-tight line-clamp-2 mb-1">
-                      {book.title}
-                    </p>
-                    <p className="text-[#1C0F0A]/40 text-xs">{book.author}</p>
-                    <p className="text-[#815854]/70 text-xs mt-1">{book.duration}</p>
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
+      <section className="mb-16">
+        <SectionHeader title="Популярное" />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {trendingBooks.map((b, i) => (
+            <TrendingRow key={b.id} book={b} rank={i + 1} />
+          ))}
         </div>
       </section>
 
-      {/* CTA Banner */}
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="relative overflow-hidden rounded-2xl border border-[#815854]/20 bg-gradient-to-r from-[#815854]/10 via-[#815854]/5 to-transparent p-10 text-center">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-[#815854]/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-            <h2 className="font-playfair text-3xl sm:text-4xl font-bold text-[#1C0F0A] mb-4">
-              Поддержите распространение
-              <br />
-              <span className="text-gradient-gold">духовных знаний</span>
-            </h2>
-            <p className="text-[#1C0F0A]/60 max-w-xl mx-auto mb-8">
-              Ваша поддержка помогает нам создавать новые аудиокниги и делать
-              вечную мудрость доступной для всех.
-            </p>
-            <Link
-              href="/donate"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-[#815854] text-[#EDE4D0] font-semibold hover:bg-[#9A6B62] transition-all duration-300 glow-sandalwood"
-            >
-              Поддержать проект <ArrowRight className="w-5 h-5" />
-            </Link>
-          </div>
-        </div>
+      {/* CTA — inline, no different background */}
+      <section className="text-center py-16">
+        <h2 className="font-playfair text-3xl sm:text-4xl font-bold mb-4" style={{ color: "var(--text)" }}>
+          Поддержите распространение
+          <br />
+          <span className="text-gradient-gold">духовных знаний</span>
+        </h2>
+        <p className="max-w-xl mx-auto mb-8 text-base" style={{ color: "var(--text-2)" }}>
+          Ваша поддержка помогает нам создавать новые аудиокниги и делать
+          вечную мудрость доступной для всех.
+        </p>
+        <Link
+          href="/donate"
+          className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold transition-all duration-300 hover:opacity-90"
+          style={{ background: "var(--accent)", color: "var(--bg)" }}
+        >
+          Поддержать проект <ArrowRight className="w-5 h-5" />
+        </Link>
       </section>
     </div>
   );
