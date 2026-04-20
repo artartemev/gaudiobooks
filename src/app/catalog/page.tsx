@@ -72,10 +72,10 @@ export default function CatalogPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-10">
-          <h1 className="font-playfair text-4xl sm:text-5xl font-bold text-[#F7F1E8] mb-3">
+          <h1 className="font-playfair text-4xl sm:text-5xl font-bold text-[#1C0F0A] mb-3">
             Каталог книг
           </h1>
-          <p className="text-[#F7F1E8]/50 text-lg">
+          <p className="text-[#6B4C3B] text-lg">
             {books.length} аудиокниг гаудия-вайшнавской традиции
           </p>
         </div>
@@ -94,15 +94,15 @@ export default function CatalogPage() {
               <select
                 value={sort}
                 onChange={(e) => setSort(e.target.value as SortKey)}
-                className="appearance-none pl-10 pr-8 py-3 rounded-xl border border-[#C9A66B]/20 bg-white/5 text-[#F7F1E8] text-sm focus:outline-none focus:border-[#C9A66B]/50 cursor-pointer min-w-[160px]"
+                className="appearance-none pl-10 pr-8 py-3 rounded-xl border border-[#815854]/20 bg-white/5 text-[#1C0F0A] text-sm focus:outline-none focus:border-[#815854]/50 cursor-pointer min-w-[160px]"
               >
                 {sortOptions.map((opt) => (
-                  <option key={opt.value} value={opt.value} className="bg-[#1A1A22]">
+                  <option key={opt.value} value={opt.value} className="bg-[#EDE4D0]">
                     {opt.label}
                   </option>
                 ))}
               </select>
-              <ArrowUpDown className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#F7F1E8]/40 pointer-events-none" />
+              <ArrowUpDown className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6B4C3B]/60 pointer-events-none" />
             </div>
 
             {/* Filter toggle (mobile) */}
@@ -110,8 +110,8 @@ export default function CatalogPage() {
               className={cn(
                 "lg:hidden flex items-center gap-2 px-4 py-3 rounded-xl border text-sm transition-all",
                 showFilters
-                  ? "border-[#C9A66B]/50 bg-[#C9A66B]/10 text-[#C9A66B]"
-                  : "border-[#C9A66B]/20 bg-white/5 text-[#F7F1E8]/70"
+                  ? "border-[#815854]/50 bg-[#815854]/10 text-[#815854]"
+                  : "border-[#815854]/20 bg-white/5 text-[#6B4C3B]/70"
               )}
               onClick={() => setShowFilters(!showFilters)}
             >
@@ -130,7 +130,7 @@ export default function CatalogPage() {
             )}
           >
             <div className="sticky top-24">
-              <h3 className="text-[#C9A66B] font-semibold text-xs uppercase tracking-widest mb-4">
+              <h3 className="text-[#815854] font-semibold text-xs uppercase tracking-widest mb-4">
                 Авторы
               </h3>
               <div className="space-y-1">
@@ -139,8 +139,8 @@ export default function CatalogPage() {
                   className={cn(
                     "w-full text-left px-3 py-2 rounded-lg text-sm transition-all",
                     activeAuthor === "all"
-                      ? "bg-[#C9A66B]/15 text-[#C9A66B]"
-                      : "text-[#F7F1E8]/60 hover:text-[#F7F1E8] hover:bg-white/5"
+                      ? "bg-[#815854]/15 text-[#815854]"
+                      : "text-[#6B4C3B]/60 hover:text-[#1C0F0A] hover:bg-white/5"
                   )}
                 >
                   Все авторы
@@ -152,12 +152,12 @@ export default function CatalogPage() {
                     className={cn(
                       "w-full text-left px-3 py-2 rounded-lg text-sm transition-all leading-tight",
                       activeAuthor === author.id
-                        ? "bg-[#C9A66B]/15 text-[#C9A66B]"
-                        : "text-[#F7F1E8]/60 hover:text-[#F7F1E8] hover:bg-white/5"
+                        ? "bg-[#815854]/15 text-[#815854]"
+                        : "text-[#6B4C3B]/60 hover:text-[#1C0F0A] hover:bg-white/5"
                     )}
                   >
                     <span className="line-clamp-2">{author.name}</span>
-                    <span className="text-[10px] text-[#F7F1E8]/30 mt-0.5 block">
+                    <span className="text-[10px] text-[#A08060] mt-0.5 block">
                       {author.booksCount} книг
                     </span>
                   </button>
@@ -170,14 +170,14 @@ export default function CatalogPage() {
           <div className="flex-1 min-w-0">
             {filtered.length === 0 ? (
               <div className="text-center py-20">
-                <p className="text-[#F7F1E8]/30 text-lg mb-3">Ничего не найдено</p>
-                <p className="text-[#F7F1E8]/20 text-sm">
+                <p className="text-[#6B4C3B]/60 text-lg mb-3">Ничего не найдено</p>
+                <p className="text-[#A08060] text-sm">
                   Попробуйте изменить параметры поиска
                 </p>
               </div>
             ) : (
               <>
-                <p className="text-[#F7F1E8]/30 text-sm mb-6">
+                <p className="text-[#6B4C3B]/60 text-sm mb-6">
                   Найдено: {filtered.length} {filtered.length === 1 ? "книга" : "книг"}
                 </p>
                 <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5">

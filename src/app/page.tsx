@@ -1,152 +1,171 @@
 import Link from "next/link";
-import { ArrowRight, Star, TrendingUp, Sparkles } from "lucide-react";
-import { HeroSection } from "@/components/HeroSection";
-import { BookCard } from "@/components/BookCard";
-import { books } from "@/lib/data";
+import { books, authors } from "@/lib/data";
 
-const featuredBooks = books.filter((b) => b.isPopular).slice(0, 4);
-const newReleases = books.filter((b) => b.isNew).slice(0, 4);
+const recentBooks = books.slice(0, 6);
+const newBooks = books.filter((b) => b.isNew).slice(0, 8);
 
-const stats = [
-  { value: "58", label: "аудиокниг в каталоге", icon: "📚" },
-  { value: "20", label: "авторов и ачарьев", icon: "✍️" },
-  { value: "1 126", label: "глав и треков", icon: "🎧" },
-  { value: "510+", label: "часов записей", icon: "⏱️" },
-];
+// ── ContinueCard (160×210px) ──────────────────────────────────────────────────
+function ContinueCard({ book, chapterNum }: { book: (typeof books)[0]; chapterNum: number }) {
+  const initial = book.title.charAt(0).toUpperCase();
+  const gradients = [
+    "from-[#5C3B2E] to-[#8B6555]",
+    "from-[#3B4A2E] to-[#6B7A4E]",
+    "from-[#2E3B5C] to-[#4E6B8B]",
+    "from-[#4A2E3B] to-[#7A4E6B]",
+    "from-[#3B3B2E] to-[#6B6B4E]",
+    "from-[#2E4A3B] to-[#4E8B6B]",
+  ];
+  const grad = gradients[parseInt(book.id, 16) % gradients.length] ?? gradients[0];
 
+  return (
+    <Link href={`/book/${book.slug}`} className="flex-shrink-0">
+      <div className="relative rounded-2xl overflow-hidden" style={{ width: 160, height: 210 }}>
+        {/* Background */}
+        {book.cover ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={book.cover}
+            alt={book.title}
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+        ) : (
+          <div className={`absolute inset-0 bg-gradient-to-br ${grad} flex items-center justify-center`}>
+            <span className="font-playfair text-5xl font-bold text-white/30">{initial}</span>
+          </div>
+        )}
+        {/* Bottom gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+        {/* Text */}
+        <div className="absolute bottom-0 left-0 right-0 p-3">
+          <p className="text-white font-bold text-xs leading-tight line-clamp-2 mb-1">
+            {book.title}
+          </p>
+          <p className="text-white/60 text-[10px]">глава {chapterNum}</p>
+        </div>
+        {/* Progress bar */}
+        <div className="absolute bottom-0 left-0 right-0 h-1 bg-white/20">
+          <div className="h-full bg-[#F0D0A0]" style={{ width: "30%" }} />
+        </div>
+      </div>
+    </Link>
+  );
+}
+
+// ── SmallBookCard ─────────────────────────────────────────────────────────────
+function SmallBookCard({ book }: { book: (typeof books)[0] }) {
+  const initial = book.title.charAt(0).toUpperCase();
+  const gradients = [
+    "from-[#7A4E3B] to-[#A07060]",
+    "from-[#4E6B3B] to-[#80A060]",
+    "from-[#3B4E7A] to-[#607FA0]",
+    "from-[#6B3B6B] to-[#A06BA0]",
+    "from-[#6B6B3B] to-[#A0A060]",
+    "from-[#3B6B4E] to-[#60A07A]",
+    "from-[#6B4E3B] to-[#A0806B]",
+    "from-[#3B6B6B] to-[#60A0A0]",
+  ];
+  const grad = gradients[parseInt(book.id, 16) % gradients.length] ?? gradients[0];
+
+  return (
+    <Link href={`/book/${book.slug}`} className="flex-shrink-0">
+      <div className="rounded-xl overflow-hidden" style={{ width: 130, height: 170 }}>
+        <div className="relative w-full h-full">
+          {book.cover ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={book.cover}
+              alt={book.title}
+              className="w-full h-full object-cover"
+            />
+          ) : (
+            <div className={`w-full h-full bg-gradient-to-br ${grad} flex items-center justify-center`}>
+              <span className="font-playfair text-4xl font-bold text-white/40">{initial}</span>
+            </div>
+          )}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+          <div className="absolute bottom-0 left-0 right-0 p-2">
+            <p className="text-white font-semibold text-[10px] leading-tight line-clamp-2">
+              {book.title}
+            </p>
+          </div>
+          {book.isNew && (
+            <div className="absolute top-1.5 left-1.5 bg-[#815854] rounded px-1.5 py-0.5">
+              <span className="text-white text-[8px] font-bold">НОВИНКА</span>
+            </div>
+          )}
+        </div>
+      </div>
+    </Link>
+  );
+}
+
+// ── AuthorCard ────────────────────────────────────────────────────────────────
+function AuthorCard({ author }: { author: (typeof authors)[0] }) {
+  const initial = author.name.charAt(0).toUpperCase();
+
+  return (
+    <Link href={`/catalog?author=${author.id}`} className="flex-shrink-0">
+      <div className="flex flex-col items-center" style={{ width: 110 }}>
+        {/* Portrait circle */}
+        <div className="w-20 h-20 rounded-full overflow-hidden bg-[#D4C4A4] border-2 border-[#815854]/20 flex items-center justify-center mb-2">
+          {author.image ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={author.image}
+              alt={author.name}
+              className="w-full h-full object-cover"
+            />
+          ) : (
+            <span className="font-playfair text-2xl font-bold text-[#815854]/60">{initial}</span>
+          )}
+        </div>
+        <p className="text-[#1C0F0A] font-semibold text-xs text-center leading-tight line-clamp-2 mb-0.5">
+          {author.name}
+        </p>
+        <p className="text-[#A08060] text-[10px]">{author.booksCount} книг</p>
+      </div>
+    </Link>
+  );
+}
+
+// ── Section heading ───────────────────────────────────────────────────────────
+function SectionTitle({ children }: { children: React.ReactNode }) {
+  return (
+    <h2 className="font-playfair text-xl font-bold text-[#1C0F0A] mb-4">{children}</h2>
+  );
+}
+
+// ── Page ─────────────────────────────────────────────────────────────────────
 export default function HomePage() {
   return (
-    <div className="pb-10">
-      <HeroSection />
-
-      {/* Stats */}
-      <section className="py-14 border-y border-[#C9A66B]/10 bg-gradient-to-r from-[#0E0E12] via-[#111118] to-[#0E0E12]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-            {stats.map((stat) => (
-              <div key={stat.label} className="text-center group">
-                <div className="text-2xl mb-2">{stat.icon}</div>
-                <div className="font-playfair text-3xl font-bold text-[#C9A66B] mb-1">
-                  {stat.value}
-                </div>
-                <div className="text-[#F7F1E8]/40 text-sm">{stat.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Featured Books */}
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between mb-8">
-            <div className="flex items-center gap-3">
-              <Star className="w-5 h-5 text-[#C9A66B]" />
-              <h2 className="font-playfair text-2xl sm:text-3xl font-bold text-[#F7F1E8]">
-                Избранные книги
-              </h2>
-            </div>
-            <Link
-              href="/catalog"
-              className="flex items-center gap-1.5 text-[#C9A66B] text-sm hover:gap-2.5 transition-all duration-200"
-            >
-              Все книги <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-            {featuredBooks.map((book) => (
-              <BookCard key={book.id} book={book} />
-            ))}
-          </div>
+    <div className="pb-32 px-4 pt-2">
+      {/* Continue Listening */}
+      <section className="mb-8">
+        <SectionTitle>Продолжить прослушивание</SectionTitle>
+        <div className="flex gap-3 overflow-x-auto pb-2 -mx-4 px-4 no-scrollbar">
+          {recentBooks.map((book, idx) => (
+            <ContinueCard key={book.id} book={book} chapterNum={idx + 1} />
+          ))}
         </div>
       </section>
 
       {/* New Releases */}
-      <section className="py-16 bg-gradient-to-b from-transparent via-[#111118]/50 to-transparent">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between mb-8">
-            <div className="flex items-center gap-3">
-              <Sparkles className="w-5 h-5 text-[#C9A66B]" />
-              <h2 className="font-playfair text-2xl sm:text-3xl font-bold text-[#F7F1E8]">
-                Новые поступления
-              </h2>
-            </div>
-            <Link
-              href="/catalog?filter=new"
-              className="flex items-center gap-1.5 text-[#C9A66B] text-sm hover:gap-2.5 transition-all duration-200"
-            >
-              Смотреть все <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-            {newReleases.map((book) => (
-              <BookCard key={book.id} book={book} />
-            ))}
-          </div>
+      <section className="mb-8">
+        <SectionTitle>Новые публикации</SectionTitle>
+        <div className="flex gap-3 overflow-x-auto pb-2 -mx-4 px-4 no-scrollbar">
+          {newBooks.map((book) => (
+            <SmallBookCard key={book.id} book={book} />
+          ))}
         </div>
       </section>
 
-      {/* Trending */}
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center gap-3 mb-8">
-            <TrendingUp className="w-5 h-5 text-[#C9A66B]" />
-            <h2 className="font-playfair text-2xl sm:text-3xl font-bold text-[#F7F1E8]">
-              Популярное сейчас
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {books.slice(0, 3).map((book, idx) => (
-              <Link key={book.id} href={`/book/${book.slug}`}>
-                <div className="card-glow flex items-center gap-4 p-4">
-                  <span className="font-playfair text-4xl font-bold text-[#C9A66B]/20 w-10 flex-shrink-0">
-                    {idx + 1}
-                  </span>
-                  <div className="w-12 h-16 rounded-lg overflow-hidden flex-shrink-0 bg-[#C9A66B]/10">
-                    {book.cover && (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img
-                        src={book.cover}
-                        alt={book.title}
-                        className="w-full h-full object-cover"
-                      />
-                    )}
-                  </div>
-                  <div className="min-w-0">
-                    <p className="text-[#F7F1E8] font-medium text-sm leading-tight line-clamp-2 mb-1">
-                      {book.title}
-                    </p>
-                    <p className="text-[#F7F1E8]/40 text-xs">{book.author}</p>
-                    <p className="text-[#C9A66B]/70 text-xs mt-1">{book.duration}</p>
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Banner */}
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="relative overflow-hidden rounded-2xl border border-[#C9A66B]/20 bg-gradient-to-r from-[#C9A66B]/10 via-[#C9A66B]/5 to-transparent p-10 text-center">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-[#C9A66B]/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-            <h2 className="font-playfair text-3xl sm:text-4xl font-bold text-[#F7F1E8] mb-4">
-              Поддержите распространение
-              <br />
-              <span className="text-gradient-gold">духовных знаний</span>
-            </h2>
-            <p className="text-[#F7F1E8]/60 max-w-xl mx-auto mb-8">
-              Ваша поддержка помогает нам создавать новые аудиокниги и делать
-              вечную мудрость доступной для всех.
-            </p>
-            <Link
-              href="/donate"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-[#C9A66B] text-[#0E0E12] font-semibold hover:bg-[#D4B47C] transition-all duration-300 glow-sandalwood"
-            >
-              Поддержать проект <ArrowRight className="w-5 h-5" />
-            </Link>
-          </div>
+      {/* Author Catalog */}
+      <section>
+        <SectionTitle>Каталог</SectionTitle>
+        <div className="flex gap-4 overflow-x-auto pb-2 -mx-4 px-4 no-scrollbar">
+          {authors.map((author) => (
+            <AuthorCard key={author.id} author={author} />
+          ))}
         </div>
       </section>
     </div>
