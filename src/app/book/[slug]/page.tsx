@@ -37,6 +37,7 @@ export default function BookPage({ params }: Props) {
     number: i + 1,
     title: `Глава ${i + 1}`,
     duration: "30м",
+    partTitle: '',
   }));
 
   const related = books
@@ -138,9 +139,15 @@ export default function BookPage({ params }: Props) {
             Содержание
           </h2>
           <div className="space-y-2">
-            {chapters.map((chapter) => (
+            {chapters.map((chapter, idx) => (
+              <div key={chapter.number}>
+                {/* Part divider when partTitle changes */}
+                {chapter.partTitle && (idx === 0 || chapters[idx - 1].partTitle !== chapter.partTitle) && (
+                  <p className="text-[#C9A66B]/60 text-xs uppercase tracking-widest font-semibold px-1 pt-4 pb-2 first:pt-0">
+                    {chapter.partTitle}
+                  </p>
+                )}
               <div
-                key={chapter.number}
                 className="card-glow overflow-hidden"
               >
                 <button
@@ -188,6 +195,7 @@ export default function BookPage({ params }: Props) {
                     </p>
                   </div>
                 )}
+              </div>
               </div>
             ))}
           </div>

@@ -8,10 +8,10 @@ const featuredBooks = books.filter((b) => b.isPopular).slice(0, 4);
 const newReleases = books.filter((b) => b.isNew).slice(0, 4);
 
 const stats = [
-  { value: "120+", label: "книг в каталоге", icon: "📚" },
-  { value: "50+", label: "авторов и ачарьев", icon: "✍️" },
-  { value: "10 000+", label: "активных слушателей", icon: "🎧" },
-  { value: "500+", label: "часов записей", icon: "⏱️" },
+  { value: "58", label: "аудиокниг в каталоге", icon: "📚" },
+  { value: "20", label: "авторов и ачарьев", icon: "✍️" },
+  { value: "1 126", label: "глав и треков", icon: "🎧" },
+  { value: "510+", label: "часов записей", icon: "⏱️" },
 ];
 
 export default function HomePage() {
