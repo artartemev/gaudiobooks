@@ -30,8 +30,19 @@ function stripHtml(html: string): string {
   return (html ?? '').replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim()
 }
 
-// CDN base URL — set NEXT_PUBLIC_CDN_URL env var when deploying
-export const CDN_BASE = process.env.NEXT_PUBLIC_CDN_URL ?? ''
+// CDN base URL
+export const CDN_BASE =
+  process.env.NEXT_PUBLIC_CDN_URL ?? 'https://gaudio.miracall.net/authors'
+
+// Encode a file path (preserve slashes, encode each segment)
+function cdnUrl(relativePath: string): string {
+  if (!relativePath) return ''
+  const encoded = relativePath
+    .split('/')
+    .map(seg => encodeURIComponent(seg))
+    .join('/')
+  return `${CDN_BASE}/${encoded}`
+}
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 export interface Author {
@@ -45,9 +56,9 @@ export interface Author {
 export interface Track {
   id: string
   title: string
-  file: string
-  duration: string         // "16:41"
-  durationSec: number      // 1001
+  file: string            // full CDN URL, ready for <audio src>
+  duration: string        // "16:41"
+  durationSec: number     // 1001
   trackNumber: string
   partTitle: string
 }
@@ -110,7 +121,7 @@ export const books: Book[] = rawData.authors.flatMap(author => {
         return {
           id: track.id,
           title: track.title,
-          file: track.file,
+          file: cdnUrl(track.file),
           duration: track.length_formatted,
           durationSec: track.length,
           trackNumber: track.track_number,
@@ -135,7 +146,7 @@ export const books: Book[] = rawData.authors.flatMap(author => {
       description: stripHtml(book.description || book.shortDescription || ''),
       isNew: book.lastModified > ONE_YEAR_AGO,
       isPopular,
-      cover: CDN_BASE && book.image ? `${CDN_BASE}/${book.image}` : '',
+      cover: book.image ? cdnUrl(book.image) : '',
       lastModified: book.lastModified,
     }
   })
