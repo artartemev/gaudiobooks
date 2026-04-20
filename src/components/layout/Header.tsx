@@ -7,24 +7,19 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 bg-[#EDE4D0] px-4 py-3">
       <div className="flex items-center justify-between">
-        {/* Logo + Title */}
-        <Link href="/" className="flex items-center gap-2.5">
+        {/* Logo */}
+        <Link href="/" className="flex items-center gap-3">
           <Image
             src="/logo.svg"
-            alt="Gaudiobooks logo"
-            width={120}
+            alt="Gaudiobooks"
+            width={160}
             height={28}
             style={{ height: "28px", width: "auto" }}
             priority
           />
-          <div className="flex flex-col leading-none">
-            <span className="font-playfair text-[28px] font-bold text-[#1C0F0A] leading-none">
-              Gaudiobook
-            </span>
-            <span className="text-[8px] tracking-widest text-[#6B4C3B] uppercase mt-0.5">
-              Аудиокниги. Гаудия Вайшнавизм
-            </span>
-          </div>
+          <span className="text-[9px] tracking-widest text-[#6B4C3B]/70 uppercase hidden sm:block">
+            Аудиокниги. Гаудия Вайшнавизм
+          </span>
         </Link>
 
         {/* Avatar */}
