@@ -76,12 +76,14 @@ export default function HomePage() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-32">
       {/* Hero */}
-      <section className="relative py-24 text-center overflow-hidden">
-        {/* Big blurred glow behind */}
-        <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full pointer-events-none"
-          style={{ background: "var(--accent)", opacity: 0.06, filter: "blur(80px)" }}
-        />
+      <section className="relative py-24 text-center">
+        {/* Big blurred glow behind — isolated so overflow-hidden doesn't create dark compositing layer on mobile */}
+        <div className="absolute inset-0 pointer-events-none" style={{ contain: "strict" }}>
+          <div
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full"
+            style={{ background: "var(--accent)", opacity: 0.06, filter: "blur(80px)" }}
+          />
+        </div>
         <p
           className="text-xs uppercase tracking-[0.3em] mb-6 relative"
           style={{ color: "var(--text-3)" }}
