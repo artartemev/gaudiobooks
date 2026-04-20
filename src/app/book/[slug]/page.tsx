@@ -50,7 +50,7 @@ export default function BookPage({ params }: Props) {
         {/* Back */}
         <Link
           href="/catalog"
-          className="inline-flex items-center gap-2 text-[#6B4C3B]/60 hover:text-[#815854] text-sm mb-8 transition-colors"
+          className="inline-flex items-center gap-2 text-[#1C0F0A]/40 hover:text-[#815854] text-sm mb-8 transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
           Назад в каталог
@@ -60,8 +60,8 @@ export default function BookPage({ params }: Props) {
         <div className="flex flex-col md:flex-row gap-8 lg:gap-12 mb-14">
           {/* Cover */}
           <div className="flex-shrink-0">
-            <div className="relative w-56 sm:w-64 mx-auto md:mx-0 rounded-2xl overflow-hidden shadow-2xl shadow-black/20 border border-[#815854]/20">
-              <div className="aspect-[2/3] bg-gradient-to-br from-[#D4C4A4] to-[#C4B494]">
+            <div className="relative w-56 sm:w-64 mx-auto md:mx-0 rounded-2xl overflow-hidden shadow-2xl shadow-black/50 border border-[#815854]/20">
+              <div className="aspect-[2/3] bg-gradient-to-br from-[#E0D2B8] to-[#EDE4D0]">
                 {book.cover ? (
                   <Image
                     src={book.cover}
@@ -86,12 +86,12 @@ export default function BookPage({ params }: Props) {
           <div className="flex-1">
             <div className="flex flex-wrap gap-2 mb-4">
               {book.isNew && (
-                <Badge className="bg-[#815854] text-[#FAF5EE] font-bold border-0">
+                <Badge className="bg-[#815854] text-[#EDE4D0] font-bold border-0">
                   НОВИНКА
                 </Badge>
               )}
               {book.isPopular && (
-                <Badge className="bg-white/15 text-[#1C0F0A] border border-white/20">
+                <Badge className="bg-white/10 text-[#1C0F0A] border border-white/20">
                   ПОПУЛЯРНОЕ
                 </Badge>
               )}
@@ -104,24 +104,24 @@ export default function BookPage({ params }: Props) {
             <p className="text-[#815854] text-lg mb-6">{book.author}</p>
 
             <div className="flex flex-wrap gap-6 mb-6 text-sm">
-              <div className="flex items-center gap-2 text-[#6B4C3B]">
+              <div className="flex items-center gap-2 text-[#1C0F0A]/50">
                 <Clock className="w-4 h-4 text-[#815854]/60" />
                 {book.duration}
               </div>
-              <div className="flex items-center gap-2 text-[#6B4C3B]">
+              <div className="flex items-center gap-2 text-[#1C0F0A]/50">
                 <BookOpen className="w-4 h-4 text-[#815854]/60" />
                 {book.chapters} глав
               </div>
             </div>
 
-            <p className="text-[#6B4C3B] leading-relaxed mb-8 max-w-2xl">
+            <p className="text-[#1C0F0A]/60 leading-relaxed mb-8 max-w-2xl">
               {book.description}
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3">
               <button
                 onClick={() => setCurrentBook(book)}
-                className="flex items-center justify-center gap-3 px-8 py-4 rounded-xl bg-[#815854] text-[#FAF5EE] font-semibold text-base hover:bg-[#9A6B62] transition-all duration-300 glow-sandalwood shadow-lg shadow-[#815854]/20"
+                className="flex items-center justify-center gap-3 px-8 py-4 rounded-xl bg-[#815854] text-[#EDE4D0] font-semibold text-base hover:bg-[#9A6B62] transition-all duration-300 glow-sandalwood shadow-lg shadow-[#815854]/20"
               >
                 <Play className="w-5 h-5" fill="currentColor" />
                 Слушать сейчас
@@ -167,7 +167,7 @@ export default function BookPage({ params }: Props) {
                     </p>
                   </div>
                   <div className="flex items-center gap-3 ml-4">
-                    <span className="text-[#6B4C3B]/50 text-xs hidden sm:block">
+                    <span className="text-[#1C0F0A]/30 text-xs hidden sm:block">
                       {chapter.duration}
                     </span>
                     <button
@@ -181,15 +181,15 @@ export default function BookPage({ params }: Props) {
                       <Play className="w-3.5 h-3.5" fill="currentColor" />
                     </button>
                     {openChapter === chapter.number ? (
-                      <ChevronUp className="w-4 h-4 text-[#6B4C3B]/50" />
+                      <ChevronUp className="w-4 h-4 text-[#1C0F0A]/30" />
                     ) : (
-                      <ChevronDown className="w-4 h-4 text-[#6B4C3B]/50" />
+                      <ChevronDown className="w-4 h-4 text-[#1C0F0A]/30" />
                     )}
                   </div>
                 </button>
                 {openChapter === chapter.number && (
                   <div className="px-4 pb-4 pt-0 border-t border-[#815854]/10">
-                    <p className="text-[#6B4C3B]/60 text-sm mt-3">
+                    <p className="text-[#1C0F0A]/40 text-sm mt-3">
                       Продолжительность: {chapter.duration}. Нажмите кнопку
                       воспроизведения, чтобы начать слушать эту главу.
                     </p>

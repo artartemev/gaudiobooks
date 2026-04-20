@@ -75,7 +75,7 @@ export default function CatalogPage() {
           <h1 className="font-playfair text-4xl sm:text-5xl font-bold text-[#1C0F0A] mb-3">
             Каталог книг
           </h1>
-          <p className="text-[#6B4C3B] text-lg">
+          <p className="text-[#1C0F0A]/50 text-lg">
             {books.length} аудиокниг гаудия-вайшнавской традиции
           </p>
         </div>
@@ -97,12 +97,12 @@ export default function CatalogPage() {
                 className="appearance-none pl-10 pr-8 py-3 rounded-xl border border-[#815854]/20 bg-white/5 text-[#1C0F0A] text-sm focus:outline-none focus:border-[#815854]/50 cursor-pointer min-w-[160px]"
               >
                 {sortOptions.map((opt) => (
-                  <option key={opt.value} value={opt.value} className="bg-[#EDE4D0]">
+                  <option key={opt.value} value={opt.value} className="bg-[#E0D2B8]">
                     {opt.label}
                   </option>
                 ))}
               </select>
-              <ArrowUpDown className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6B4C3B]/60 pointer-events-none" />
+              <ArrowUpDown className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#1C0F0A]/40 pointer-events-none" />
             </div>
 
             {/* Filter toggle (mobile) */}
@@ -111,7 +111,7 @@ export default function CatalogPage() {
                 "lg:hidden flex items-center gap-2 px-4 py-3 rounded-xl border text-sm transition-all",
                 showFilters
                   ? "border-[#815854]/50 bg-[#815854]/10 text-[#815854]"
-                  : "border-[#815854]/20 bg-white/5 text-[#6B4C3B]/70"
+                  : "border-[#815854]/20 bg-white/5 text-[#1C0F0A]/70"
               )}
               onClick={() => setShowFilters(!showFilters)}
             >
@@ -140,7 +140,7 @@ export default function CatalogPage() {
                     "w-full text-left px-3 py-2 rounded-lg text-sm transition-all",
                     activeAuthor === "all"
                       ? "bg-[#815854]/15 text-[#815854]"
-                      : "text-[#6B4C3B]/60 hover:text-[#1C0F0A] hover:bg-white/5"
+                      : "text-[#1C0F0A]/60 hover:text-[#1C0F0A] hover:bg-white/5"
                   )}
                 >
                   Все авторы
@@ -153,11 +153,11 @@ export default function CatalogPage() {
                       "w-full text-left px-3 py-2 rounded-lg text-sm transition-all leading-tight",
                       activeAuthor === author.id
                         ? "bg-[#815854]/15 text-[#815854]"
-                        : "text-[#6B4C3B]/60 hover:text-[#1C0F0A] hover:bg-white/5"
+                        : "text-[#1C0F0A]/60 hover:text-[#1C0F0A] hover:bg-white/5"
                     )}
                   >
                     <span className="line-clamp-2">{author.name}</span>
-                    <span className="text-[10px] text-[#A08060] mt-0.5 block">
+                    <span className="text-[10px] text-[#1C0F0A]/30 mt-0.5 block">
                       {author.booksCount} книг
                     </span>
                   </button>
@@ -170,14 +170,14 @@ export default function CatalogPage() {
           <div className="flex-1 min-w-0">
             {filtered.length === 0 ? (
               <div className="text-center py-20">
-                <p className="text-[#6B4C3B]/60 text-lg mb-3">Ничего не найдено</p>
-                <p className="text-[#A08060] text-sm">
+                <p className="text-[#1C0F0A]/30 text-lg mb-3">Ничего не найдено</p>
+                <p className="text-[#1C0F0A]/20 text-sm">
                   Попробуйте изменить параметры поиска
                 </p>
               </div>
             ) : (
               <>
-                <p className="text-[#6B4C3B]/60 text-sm mb-6">
+                <p className="text-[#1C0F0A]/30 text-sm mb-6">
                   Найдено: {filtered.length} {filtered.length === 1 ? "книга" : "книг"}
                 </p>
                 <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5">
