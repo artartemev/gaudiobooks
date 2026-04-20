@@ -1,0 +1,119 @@
+@import "tailwindcss";
+@import "@fontsource/playfair-display/400.css";
+@import "@fontsource/playfair-display/700.css";
+@import "@fontsource/playfair-display/400-italic.css";
+
+:root {
+  --background: #0E0E12;
+  --foreground: #F7F1E8;
+  --sandalwood: #C9A66B;
+  --deep-night: #0E0E12;
+  --cream: #F7F1E8;
+
+  /* shadcn/ui design tokens */
+  --radius: 0.75rem;
+  --primary: #C9A66B;
+  --primary-foreground: #0E0E12;
+  --secondary: rgba(255, 255, 255, 0.06);
+  --secondary-foreground: #F7F1E8;
+  --muted: rgba(255, 255, 255, 0.06);
+  --muted-foreground: rgba(247, 241, 232, 0.6);
+  --accent: rgba(201, 166, 107, 0.15);
+  --accent-foreground: #C9A66B;
+  --border: rgba(201, 166, 107, 0.2);
+  --input: rgba(255, 255, 255, 0.08);
+  --ring: rgba(201, 166, 107, 0.4);
+  --card: rgba(255, 255, 255, 0.04);
+  --card-foreground: #F7F1E8;
+  --popover: #1A1A22;
+  --popover-foreground: #F7F1E8;
+  --destructive: #ef4444;
+  --destructive-foreground: #fff;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-sandalwood: var(--sandalwood);
+  --color-deep-night: var(--deep-night);
+  --color-cream: var(--cream);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-playfair: "Playfair Display", Georgia, serif;
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+* {
+  border-color: var(--border);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), Inter, Arial, sans-serif;
+  min-height: 100vh;
+}
+
+.font-playfair {
+  font-family: "Playfair Display", Georgia, serif;
+}
+
+.glow-sandalwood {
+  box-shadow: 0 0 20px rgba(201, 166, 107, 0.3);
+}
+
+.glow-sandalwood-hover:hover {
+  box-shadow: 0 0 30px rgba(201, 166, 107, 0.4);
+}
+
+.text-gradient-gold {
+  background: linear-gradient(135deg, #C9A66B 0%, #F0D090 50%, #C9A66B 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.card-glow {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(201, 166, 107, 0.2);
+  border-radius: 0.75rem;
+  transition: all 0.3s ease;
+}
+
+.card-glow:hover {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(201, 166, 107, 0.5);
+  box-shadow: 0 0 30px rgba(201, 166, 107, 0.15);
+  transform: translateY(-2px);
+}
+
+.scrollbar-thin::-webkit-scrollbar {
+  width: 4px;
+}
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: rgba(201, 166, 107, 0.3);
+  border-radius: 2px;
+}
