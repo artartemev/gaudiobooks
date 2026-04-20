@@ -170,25 +170,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* CTA — inline, no different background */}
-      <section className="text-center py-16">
-        <h2 className="font-playfair text-3xl sm:text-4xl font-bold mb-4" style={{ color: "var(--text)" }}>
-          Поддержите распространение
-          <br />
-          <span className="text-gradient-gold">духовных знаний</span>
-        </h2>
-        <p className="max-w-xl mx-auto mb-8 text-base" style={{ color: "var(--text-2)" }}>
-          Ваша поддержка помогает нам создавать новые аудиокниги и делать
-          вечную мудрость доступной для всех.
-        </p>
-        <Link
-          href="/donate"
-          className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold transition-all duration-300 hover:opacity-90"
-          style={{ background: "var(--accent)", color: "var(--bg)" }}
-        >
-          Поддержать проект <ArrowRight className="w-5 h-5" />
-        </Link>
-      </section>
+      {/* CTA — hidden for now */}
     </div>
   );
 }

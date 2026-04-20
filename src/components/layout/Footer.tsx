@@ -56,31 +56,7 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Support */}
-          <div>
-            <h3 className="font-semibold text-xs mb-4 uppercase tracking-wider" style={{ color: "var(--accent)" }}>
-              Поддержка
-            </h3>
-            <ul className="space-y-2">
-              {[
-                { href: "/donate", label: "Поддержать проект" },
-                { href: "https://patreon.com", label: "Patreon", external: true },
-                { href: "https://boosty.to", label: "Boosty", external: true },
-              ].map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    target={link.external ? "_blank" : undefined}
-                    rel={link.external ? "noopener noreferrer" : undefined}
-                    className="text-sm transition-colors duration-200 hover:opacity-100 opacity-70"
-                    style={{ color: "var(--text-2)" }}
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {/* Support — hidden for now */}
         </div>
 
         {/* Bottom */}
