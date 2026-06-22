@@ -2,43 +2,41 @@ import Link from "next/link";
 import {
   Smartphone,
   Download,
-  Wifi,
-  Moon,
-  Bookmark,
-  Zap,
+  Search,
+  BookOpen,
+  Play,
+  Sparkles,
   Star,
 } from "lucide-react";
 
+const APP_STORE_URL = "https://apps.apple.com/us/app/gaudio-books/id6737453115";
+const GOOGLE_PLAY_URL = "https://play.google.com/store/apps/details?id=com.gaudio";
+
 const features = [
   {
+    icon: BookOpen,
+    title: "Огромная библиотека",
+    description: "Аудиокниги по гаудия-вайшнавизму — всё собрано в одном месте",
+  },
+  {
+    icon: Search,
+    title: "Удобный поиск",
+    description: "Быстро находите нужную книгу или автора",
+  },
+  {
     icon: Download,
-    title: "Загрузка для офлайн",
+    title: "Прослушивание офлайн",
     description: "Скачивайте книги и слушайте без интернета в любом месте",
   },
   {
-    icon: Moon,
-    title: "Таймер сна",
-    description: "Засыпайте под чтение — плеер остановится сам в нужное время",
+    icon: Play,
+    title: "Продолжайте с места остановки",
+    description: "Приложение запомнит, где вы остановились, и продолжит оттуда",
   },
   {
-    icon: Bookmark,
-    title: "Закладки и заметки",
-    description: "Отмечайте важные места и добавляйте свои комментарии",
-  },
-  {
-    icon: Zap,
-    title: "Скорость воспроизведения",
-    description: "Слушайте с комфортной для вас скоростью: 1x, 1.25x, 1.5x, 2x",
-  },
-  {
-    icon: Wifi,
-    title: "Синхронизация",
-    description: "Продолжайте слушать с любого устройства с того места, где остановились",
-  },
-  {
-    icon: Star,
-    title: "Рекомендации",
-    description: "Умные рекомендации на основе ваших предпочтений",
+    icon: Sparkles,
+    title: "Лёгкий и приятный интерфейс",
+    description: "Чистый дизайн без лишнего — ничто не отвлекает от слушания",
   },
 ];
 
@@ -71,7 +69,12 @@ export default function DownloadPage() {
         {/* Store Cards */}
         <div className="grid sm:grid-cols-2 gap-6 max-w-2xl mx-auto mb-20">
           {/* App Store */}
-          <div className="card-base p-8 text-center group cursor-pointer">
+          <a
+            href={APP_STORE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="card-base p-8 text-center group cursor-pointer"
+          >
             <div
               className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg border"
               style={{
@@ -98,16 +101,21 @@ export default function DownloadPage() {
               ))}
               <span className="text-xs ml-2" style={{ color: "var(--text-3)" }}>4.9 / 5</span>
             </div>
-            <button
-              className="w-full py-3 rounded-xl font-semibold text-sm transition-all hover:opacity-90"
+            <span
+              className="block w-full py-3 rounded-xl font-semibold text-sm transition-all group-hover:opacity-90"
               style={{ background: "var(--accent)", color: "var(--bg)" }}
             >
               Скачать для iPhone
-            </button>
-          </div>
+            </span>
+          </a>
 
           {/* Google Play */}
-          <div className="card-base p-8 text-center group cursor-pointer">
+          <a
+            href={GOOGLE_PLAY_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="card-base p-8 text-center group cursor-pointer"
+          >
             <div
               className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg border"
               style={{
@@ -137,13 +145,13 @@ export default function DownloadPage() {
               ))}
               <span className="text-xs ml-2" style={{ color: "var(--text-3)" }}>4.8 / 5</span>
             </div>
-            <button
-              className="w-full py-3 rounded-xl font-semibold text-sm transition-all hover:opacity-90"
+            <span
+              className="block w-full py-3 rounded-xl font-semibold text-sm transition-all group-hover:opacity-90"
               style={{ background: "var(--accent)", color: "var(--bg)" }}
             >
               Скачать для Android
-            </button>
-          </div>
+            </span>
+          </a>
         </div>
 
         {/* Features */}
@@ -172,42 +180,10 @@ export default function DownloadPage() {
           </div>
         </div>
 
-        {/* Screenshots mockup */}
-        <div className="text-center">
-          <h2 className="font-playfair text-3xl font-bold mb-4" style={{ color: "var(--text)" }}>
-            Красивый и удобный интерфейс
-          </h2>
-          <p className="mb-10" style={{ color: "var(--text-3)" }}>
-            Разработан с вниманием к деталям для лучшего опыта прослушивания
-          </p>
-          <div className="flex justify-center gap-6 flex-wrap">
-            {[1, 2, 3].map((i) => (
-              <div
-                key={i}
-                className="w-44 h-80 rounded-3xl border-2 overflow-hidden shadow-2xl flex-shrink-0"
-                style={{
-                  borderColor: "var(--border)",
-                  background: "linear-gradient(to bottom, var(--bg-2), var(--bg-3))",
-                }}
-              >
-                <div
-                  className="w-full h-full flex items-center justify-center"
-                  style={{ background: "color-mix(in srgb, var(--accent) 4%, transparent)" }}
-                >
-                  <Smartphone className="w-16 h-16" style={{ color: "color-mix(in srgb, var(--accent) 20%, transparent)" }} />
-                </div>
-              </div>
-            ))}
-          </div>
-          <p className="mt-8 text-sm" style={{ color: "var(--text-3)" }}>
-            Скриншоты будут добавлены после выхода приложения
-          </p>
-        </div>
-
         {/* CTA */}
-        <div className="mt-20 text-center">
+        <div className="text-center">
           <p className="text-sm mb-4" style={{ color: "var(--text-3)" }}>
-            Пока приложение разрабатывается — слушайте прямо на сайте
+            Не хотите устанавливать приложение? Слушайте прямо на сайте
           </p>
           <Link
             href="/catalog"
