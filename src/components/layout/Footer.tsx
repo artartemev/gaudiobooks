@@ -40,7 +40,6 @@ export function Footer() {
               {[
                 { href: "/", label: "Главная" },
                 { href: "/catalog", label: "Каталог книг" },
-                { href: "/about", label: "О проекте" },
                 { href: "/download", label: "Скачать приложение" },
               ].map((link) => (
                 <li key={link.href}>

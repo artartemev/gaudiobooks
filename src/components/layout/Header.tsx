@@ -10,7 +10,6 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 
 const navLinks = [
   { href: "/catalog", label: "Каталог" },
-  { href: "/about", label: "О проекте" },
 ];
 
 export function Header() {

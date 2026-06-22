@@ -30,7 +30,6 @@ Gaudiobooks is a Gaudiya Vaishnava audiobook platform being built from scratch.
 - `/` — Home: Hero, stats, featured books, new releases
 - `/catalog` — Searchable book grid, author filter, sort
 - `/book/[slug]` — Book detail, chapter accordion, embedded player
-- `/about` — Project history, narrator (Субал Сакха дас), mission
 - `/donate` — Patreon/Boosty/Stripe donation options
 - `/download` — App Store + Google Play download cards
 
